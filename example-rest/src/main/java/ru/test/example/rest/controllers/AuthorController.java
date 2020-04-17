@@ -26,7 +26,7 @@ public class AuthorController {
     }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity createAuthor(@PathVariable Integer id) {
+    public ResponseEntity deleteAuthor(@PathVariable Integer id) {
         return AuthorRepository.findById(id).map(Author -> {
                         AuthorRepository.delete(Author);
                         return ResponseEntity.ok().build();

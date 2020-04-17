@@ -26,7 +26,7 @@ public class RecordController {
     }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity createRecord(@PathVariable Integer id){
+    public ResponseEntity deleteRecord(@PathVariable Integer id){
         return recordRepository.findById(id).map(record -> {
                     recordRepository.delete(record);
                     return ResponseEntity.ok().build();
