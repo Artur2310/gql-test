@@ -1,20 +1,20 @@
 package ru.test.example.rest.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Record {
+public class Record implements Serializable {
 
     @Id
     @GeneratedValue
@@ -24,8 +24,8 @@ public class Record {
 
     private String description;
 
-   /* @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    private Author author;*/
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "authId")
+    @JsonManagedReference
+    private Author author;
 }

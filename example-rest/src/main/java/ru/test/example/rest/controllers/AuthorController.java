@@ -11,24 +11,24 @@ import ru.test.example.rest.repositories.AuthorRepository;
 public class AuthorController {
 
     @Autowired
-    AuthorRepository AuthorRepository;
+    AuthorRepository authorRepository;
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Author> AuthorById(@PathVariable Integer id) {
-        return AuthorRepository.findById(id)
-                .map(Author -> ResponseEntity.ok().body(Author))
+    public ResponseEntity<Author> authorById(@PathVariable Integer id) {
+        return authorRepository.findById(id)
+                .map(author -> ResponseEntity.ok().body(author))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/create")
     public ResponseEntity<Author> createAuthor(@RequestBody Author Author) {
-        return ResponseEntity.ok().body(AuthorRepository.save(Author));
+        return ResponseEntity.ok().body(authorRepository.save(Author));
     }
 
     @PostMapping("/delete/{id}")
     public ResponseEntity deleteAuthor(@PathVariable Integer id) {
-        return AuthorRepository.findById(id).map(Author -> {
-                        AuthorRepository.delete(Author);
+        return authorRepository.findById(id).map(Author -> {
+                        authorRepository.delete(Author);
                         return ResponseEntity.ok().build();
                     })
                     .orElseGet(() -> ResponseEntity.notFound().build());

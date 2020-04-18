@@ -1,14 +1,10 @@
 package ru.test.example.rest.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Lazy;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Author {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue
@@ -27,8 +23,9 @@ public class Author {
 
     private Integer age;
 
-    /*@OneToMany (mappedBy = "author")
-    @Lazy
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    private Set<Record> records = new HashSet<>();*/
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    @JsonBackReference
+    @EqualsAndHashCode.Exclude
+    private Set<Record> records = new HashSet<>();
+
 }
