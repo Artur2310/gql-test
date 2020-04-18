@@ -1,14 +1,16 @@
 package ru.test.example.rest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.test.example.rest.models.Record;
 import ru.test.example.rest.repositories.RecordRepository;
 
-import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/record")
@@ -25,8 +27,14 @@ public class RecordController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Iterable<Record>> records(){
-        return ResponseEntity.ok(recordRepository.findAll());
+    public ResponseEntity<Iterable<Record>> records(
+            @RequestParam(value = "limit", required = false) Integer limit,
+            @PageableDefault(size = Integer.MAX_VALUE) Pageable page){
+
+        if(limit != null){
+            page = PageRequest.of(0,limit);
+        }
+        return ResponseEntity.ok().body(recordRepository.findAll(page).getContent());
     }
 
     @PostMapping("/create")

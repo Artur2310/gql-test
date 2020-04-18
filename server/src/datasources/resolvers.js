@@ -4,7 +4,7 @@ module.exports = {
             return dataSources.recordAPI.getRecord(id);
         },
         records: async (root, args, {dataSources}) => {
-            return dataSources.recordAPI.getRecords().then(function (output) {
+            return dataSources.recordAPI.getRecords(args).then(function (output) {
                 return output;
             });
         },

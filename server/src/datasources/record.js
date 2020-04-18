@@ -10,8 +10,8 @@ class RecordAPI extends RESTDataSource {
         return this.get(`get/${id}`);
     }
 
-    async getRecords() {
-        return this.get(`get`);
+    async getRecords(args) {
+        return this.get(`get`, args);
     }
 
     async createRecord(record) {
