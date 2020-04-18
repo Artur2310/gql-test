@@ -19,10 +19,12 @@ input RecordInput {
 
 type Query {
   record(id: ID!): Record
+  records(limit: Int): [Record]
 }
 
 type Mutation {
   createRecord(record: RecordInput!): Record!
+  updateRecord(record: RecordInput!): Record!
   deleteRecord(id: ID!): DeleteResponse!
 }
 `;

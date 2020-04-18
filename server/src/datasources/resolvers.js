@@ -3,6 +3,11 @@ module.exports = {
         record: async (root, {id}, {dataSources}) => {
             return dataSources.recordAPI.getRecord(id);
         },
+        records: async (root, args, {dataSources}) => {
+            return dataSources.recordAPI.getRecords().then(function (output) {
+                return output;
+            });
+        },
     },
     Mutation:{
         createRecord: async (root, {record}, {dataSources}) => {
@@ -14,6 +19,9 @@ module.exports = {
             }).catch(function () {
                 return {result: false}
             });
+        },
+        updateRecord: async (root, {record}, {dataSources}) => {
+            return dataSources.recordAPI.updateRecord({...record});
         },
     }
 };
