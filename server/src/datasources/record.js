@@ -14,6 +14,10 @@ class RecordAPI extends RESTDataSource {
         return this.post(`/create`, record);
     }
 
+    async deleteRecord(id) {
+        return this.post(`/delete/${id}`);
+    }
+
 }
 
 module.exports = RecordAPI;

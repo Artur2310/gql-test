@@ -8,6 +8,10 @@ type Record {
   description: String
 }
 
+type DeleteResponse{
+    result: Boolean!
+}
+
 input RecordInput {
   title: String
   description: String
@@ -19,6 +23,7 @@ type Query {
 
 type Mutation {
   createRecord(record: RecordInput!): Record!
+  deleteRecord(id: ID!): DeleteResponse!
 }
 `;
 
