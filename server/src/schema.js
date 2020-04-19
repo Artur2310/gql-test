@@ -6,12 +6,14 @@ type Record {
   id: ID!
   title: String
   description: String
+  author: Int
 }
 
 type Author {
   id: ID!
   name: String
   age: Int
+  records: [Record]
 }
 
 type DeleteResponse{
@@ -21,6 +23,7 @@ type DeleteResponse{
 input RecordInput {
   title: String
   description: String
+  author: Int
 }
 
 input AuthorInput {
