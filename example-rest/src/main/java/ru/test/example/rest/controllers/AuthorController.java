@@ -1,6 +1,9 @@
 package ru.test.example.rest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.test.example.rest.models.Author;
@@ -18,6 +21,17 @@ public class AuthorController {
         return authorRepository.findById(id)
                 .map(author -> ResponseEntity.ok().body(author))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<Iterable<Author>> authors(
+            @RequestParam(value = "limit", required = false) Integer limit,
+            @PageableDefault(size = Integer.MAX_VALUE) Pageable page){
+
+        if(limit != null){
+            page = PageRequest.of(0,limit);
+        }
+        return ResponseEntity.ok().body(authorRepository.findAll(page).getContent());
     }
 
     @PostMapping("/create")

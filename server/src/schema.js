@@ -8,6 +8,12 @@ type Record {
   description: String
 }
 
+type Author {
+  id: ID!
+  name: String
+  age: Int
+}
+
 type DeleteResponse{
     result: Boolean!
 }
@@ -17,15 +23,24 @@ input RecordInput {
   description: String
 }
 
+input AuthorInput {
+  name: String
+  age: Int
+}
+
 type Query {
   record(id: ID!): Record
   records(limit: Int): [Record]
+  author(id: ID!): Author
+  authors(limit: Int): [Author]
 }
 
 type Mutation {
   createRecord(record: RecordInput!): Record!
   updateRecord(record: RecordInput!): Record!
   deleteRecord(id: ID!): DeleteResponse!
+  createAuthor(author: AuthorInput!): Author!
+  deleteAuthor(id: ID!): DeleteResponse!
 }
 `;
 

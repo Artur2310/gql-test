@@ -10,32 +10,35 @@ import ru.test.example.rest.repositories.AuthorRepository;
 import ru.test.example.rest.repositories.RecordRepository;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 @SpringBootApplication
 public class ExampleRestApplication implements CommandLineRunner {
 
-	@Autowired
-	RecordRepository recordRepository;
+    @Autowired
+    RecordRepository recordRepository;
 
-	@Autowired
-	AuthorRepository authorRepository;
+    @Autowired
+    AuthorRepository authorRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(ExampleRestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ExampleRestApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		Author author = Author.builder().id(0).name("Test").age(18).build();
-		author = authorRepository.save(author);
+    @Override
+    public void run(String... args) throws Exception {
+        Author authorOne = Author.builder().name("One").age(18).build();
+        Author authorTwo = Author.builder().name("Two").age(21).build();
 
-		Record one = Record.builder().title("One").author(author).description("One Description").build();
-		Record two = Record.builder().title("Two").author(author).description("Two Description").build();
-		Record three = Record.builder().title("Three").author(author).description("Three Description").build();
+        authorOne = authorRepository.save(authorOne);
+        authorTwo = authorRepository.save(authorTwo);
 
-		recordRepository.saveAll(Arrays.asList(one,two, three));
+        Record one = Record.builder().title("One").author(authorOne).description("One Description").build();
+        Record two = Record.builder().title("Two").author(authorOne).description("Two Description").build();
+        Record three = Record.builder().title("Three").author(authorOne).description("Three Description").build();
+        Record four = Record.builder().title("Four").author(authorTwo).description("Four Description").build();
+        Record five = Record.builder().title("Five").author(authorTwo).description("Five Description").build();
 
-	}
+        recordRepository.saveAll(Arrays.asList(one, two, three, four, five));
+
+    }
 }

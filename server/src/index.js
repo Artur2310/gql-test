@@ -2,10 +2,12 @@ const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./schema');
 
 const RecordAPI = require('./datasources/record');
+const AuthorAPI = require('./datasources/author');
 const resolvers = require('./datasources/resolvers');
 
 const dataSources = () => ({
-  recordAPI: new RecordAPI()
+  recordAPI: new RecordAPI(),
+  authorAPI: new AuthorAPI()
 });
 
 const server = new ApolloServer({

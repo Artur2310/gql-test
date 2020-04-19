@@ -1,6 +1,7 @@
 package ru.test.example.rest.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Author implements Serializable {
 
     @Id
@@ -24,7 +26,6 @@ public class Author implements Serializable {
     private Integer age;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
-    @JsonManagedReference
     @EqualsAndHashCode.Exclude
     private Set<Record> records = new HashSet<>();
 
