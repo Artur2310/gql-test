@@ -1,5 +1,6 @@
 package ru.test.example.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,6 @@ public class Record implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "authId")
-    @JsonManagedReference
+    @JsonBackReference
     private Author author;
 }

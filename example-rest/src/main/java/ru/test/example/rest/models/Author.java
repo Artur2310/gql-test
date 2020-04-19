@@ -1,6 +1,6 @@
 package ru.test.example.rest.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +24,7 @@ public class Author implements Serializable {
     private Integer age;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonManagedReference
     @EqualsAndHashCode.Exclude
     private Set<Record> records = new HashSet<>();
 
