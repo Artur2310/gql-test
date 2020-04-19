@@ -15,6 +15,7 @@ query{
     id
     title
     description
+    author
   }
 }
 ```
@@ -27,6 +28,7 @@ query{
     id
     title
     description
+    author
   }
 }
 ```
@@ -49,6 +51,23 @@ mutation{
 mutation{
   deleteRecord(id: 1){
     result
+  }
+}
+```
+
+5) Выбрать всех авторов
+
+```gql
+query{
+  authors{
+    id
+    name
+    age
+    records{
+      id
+      title
+      description
+    }
   }
 }
 ```
