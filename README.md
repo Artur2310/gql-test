@@ -15,7 +15,8 @@ query{
     id
     title
     description
-    author
+    author{
+    id
   }
 }
 ```
@@ -28,7 +29,8 @@ query{
     id
     title
     description
-    author
+    author{
+    id
   }
 }
 ```
