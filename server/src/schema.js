@@ -6,7 +6,7 @@ type Record {
   id: ID!
   title: String
   description: String
-  author: Int
+  author: Author
 }
 
 type Author {

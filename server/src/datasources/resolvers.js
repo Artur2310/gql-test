@@ -37,5 +37,10 @@ module.exports = {
                 return {result: false}
             });
         },
+    },
+    Record:{
+        author: async (root, args, {dataSources}) => {
+            return dataSources.authorAPI.getAuthor(root.author);
+        }
     }
 };
